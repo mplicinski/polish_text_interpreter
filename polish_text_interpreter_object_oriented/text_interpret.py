@@ -47,9 +47,11 @@ class polish_txt:
         special_char_words_infile.close()
         self.polish_words = polish_words
 
-
-
-    #replace the words in self.words that need special characters from th
+    #replace the words in self.words that need special characters
+    #for each word it will check if there's any matches in self.match_words. if there is one or more matches it will save the indexes of the matches in self.match_words
+    #it will then use the match indexes to find the correct version of the word (with special characters) in self.polish_words and ask the user which one he wants to use in the text.
+    #this is the most crucial function in the progarm 
+    #its unnecessarily bloated becuase there is a command line interaction loop for choosing the correct version of each word that needs to be converted 
     def convert_words(self):
         match_indexes_list = []
         words_to_convert_indexes = set()
@@ -59,7 +61,6 @@ class polish_txt:
             match_indexes = []
             for mw in range(len(self.match_words)):     # mw = match_word    
 
-   
                 if self.words[w] == self.match_words[mw]:
                     words_to_convert_indexes.add(w)
                     match_indexes.append(mw)
@@ -70,11 +71,10 @@ class polish_txt:
         words_to_convert_indexes = list(words_to_convert_indexes)
         words_to_convert_indexes.sort()
 
-
         ###### PROOF OF CONCEPT ######
+        ###### The following code loops through all the words that need to be converted and asks the user what version of the word should be used
         ###### THIS WILL NEED TO BE RECREATED INTO SOME KIND OF DIALOUGE BOX ON THE WEB APPLICATION ######
-        ###### PRETTY UGLY BUT IT WORKS FOR USING THE PROGRAM IN THE TERMINAL ######
-        
+        ###### PRETTY UGLY BUT IT WORKS FOR USING THE PROGRAM IN THE TERMINAL ######        
 
         for i in range(len(words_to_convert_indexes)):
 
@@ -107,11 +107,8 @@ class polish_txt:
             if user_choice > 1:
                 self.words[convert_index] = self.polish_words[correct_index]
 
-            #if word in self.match_words:                        #if the word appears in our dictionary of words that require special characters
-            #    match_index = self.match_words.index(word)      #save the index of the word in our dictionary 
-            #    txt_index = self.words.index(word)
-            #
-            #    self.words[txt_index] = self.polish_words[match_index]
+        ############################################################################
+        ############################################################################
     
     #check for capital letters in self.capatalized_words and capatalize any characters in self.words that should be capatalized
     def restore_case(self):
@@ -164,7 +161,7 @@ class polish_txt:
         replacement_indexes = self.polish_word_indexes()
 
         converted_text = self.original_text
-        print(converted_text)
+        print(converted_text)                   #prints the full formated text before being converted #for debugging purposes
 
         for i in range(len(polish_char_words)):
             word_to_replace = self.capatalized_words[replacement_indexes[i]]
@@ -172,14 +169,13 @@ class polish_txt:
             converted_text = converted_text.replace(word_to_replace, word_speical_chars)
 
         print()
-        print(converted_text)
+        print(converted_text)                   #prints the full formated text after being converted
 
-    def convert(self, txt):
+    #main function that runs 
+    def convert(self):              
         txt.convert_words()
         txt.restore_case()
         txt.insert_polish_words()
 
 txt = polish_txt("polish_letter.txt")
-txt.convert_words()
-txt.restore_case()
-txt.insert_polish_words()
+txt.convert()
