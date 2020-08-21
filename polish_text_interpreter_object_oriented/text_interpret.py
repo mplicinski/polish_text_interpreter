@@ -1,4 +1,4 @@
-### Polsih txt file interpreter ###
+### Polish txt file interpreter ###
 ### This program takes input in the form of txt file that contains some text written in polish 
 #   and converts all characters ment to be some special character ['ą', 'ć', 'ę', 'ł', 'ń', 'm', 'ó', 'ś', 'ź' 'ż']
 #   from the regular characters ['a', 'c', 'e', 'l', 'n', 'm', 'o', 's', 'z'] ###
