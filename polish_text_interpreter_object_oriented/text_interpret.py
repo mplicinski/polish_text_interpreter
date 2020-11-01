@@ -26,7 +26,7 @@ class polish_txt:
         word_list = [item.lower() for item in word_list]        #convert all words to be lower case
         self.words = word_list                                  #copy of the original list of words in the txt file
 
-        #create a list of lines as they appear in the original text with all capitilization and formatting
+        #create a string of the text as it appear in the original text with all capitilization, formatting, and punctuation
         infile = open(filename)
         original_text = infile.read()
         self.original_text = original_text        
@@ -37,7 +37,7 @@ class polish_txt:
         match_words_infile.close()
         self.match_words = match_words_list
 
-        #creating a dictionary of polish words -WITH- special characters to swap into the original text
+        #creating a list of polish words -WITH- special characters to swap into the original text
         special_char_words_infile = open('special_char_words.txt')
         polish_words = special_char_words_infile.read().splitlines()
         special_char_words_infile.close()
@@ -61,7 +61,7 @@ class polish_txt:
     
             if len(match_indexes) > 0:                          #if there are any matches 
                 match_indexes_list.append(match_indexes)        #add the list of match indexes for the 
-                words_to_convert_indexes.append(w)
+                words_to_convert_indexes.append(w)              #add the index of the word in self.words to a list of all the convert indexes
                 
         ### PROOF OF CONCEPT ###
         ### The rest of this function's code loops through all the words that need to be converted and asks the user what version of the word should be used
@@ -163,10 +163,6 @@ class polish_txt:
                 i = i + 1                               #go to the next word in the full text
 
         return indexes
-
-    ###############################################################
-
-
 
     #main function that runs the program
     def convert(self):              
