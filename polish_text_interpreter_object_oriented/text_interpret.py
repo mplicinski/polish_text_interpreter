@@ -132,7 +132,7 @@ class polish_txt:
 
 
 
-    ### HELPER FUNCTIONS BELOW THAT ARE USED IN OTHER FUNCTIONS ###
+    ### HELPER FUNCTIONS ###
 
     #Function that strips self.words down to only the words that contain special characters (these are the only words we have to replace)
     def strip_nonspecial_char_words(self, all_words):
@@ -155,12 +155,12 @@ class polish_txt:
         j = 0       #iterator for words with special characters
     
         while j < (len(polish_char_words)):             
-            if self.words[i] == polish_char_words[j]:   #if word in the full text matches a word in the list of only polish words w/ special characters  
+            if self.words[i] == polish_char_words[j]:   #if word in the original text matches a word in the list of only polish words w/ special characters  
                 indexes.append(i)                       #save the index
-                i = i + 1                               #go to the next word in the full text
+                i = i + 1                               #go to the next word in the original text
                 j = j + 1                               #go to the next word in the list of only polish words w/ special characters
-            else:                                       #if current word in the full text does not match the polish word
-                i = i + 1                               #go to the next word in the full text
+            else:                                       #if current word in the original text does not match the polish word
+                i = i + 1                               #go to the next word in the original text
 
         return indexes
 
